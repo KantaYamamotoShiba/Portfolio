@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロダクトデザイナーポートフォリオ</title>
+    <style>
+:root {
+    --background: #e6ebf5;
+    --text-color: #2d3748;
+    --accent-light: #5e8bf0;
+    --accent-mid: #3a68ed;
+    --accent-dark: #2246cc;
+    --shadow-light: #ffffff;
+    --shadow-dark: #bec8d9;
+    --category-color-1: #4158D0;
+    --category-color-2: #0093E9;
+    --category-color-3: #38B2AC;
+    --category-color-4: #6a64e7;
+    --category-color-5: #3c7efc;
+}
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* ニューモーフィズム要素のベーススタイル */
+        .neumorphic {
+            border-radius: 16px;
+            background: var(--background);
+            box-shadow: 8px 8px 16px var(--shadow-dark),
+                        -8px -8px 16px var(--shadow-light);
+            padding: 25px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .neumorphic-inset {
+            border-radius: 16px;
+            background: var(--background);
+            box-shadow: inset 5px 5px 10px var(--shadow-dark),
+                        inset -5px -5px 10px var(--shadow-light);
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .neumorphic-button {
+            border: none;
+            border-radius: 50px;
+            background: var(--background);
+            box-shadow: 4px 4px 8px var(--shadow-dark),
+                       -4px -4px 8px var(--shadow-light);
+            padding: 12px 24px;
+            cursor: pointer;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: all 0.2s ease;
+            margin: 10px 5px;
+        }
+
+        .neumorphic-button:hover {
+            box-shadow: 6px 6px 12px var(--shadow-dark),
+                       -6px -6px 12px var(--shadow-light);
+        }
+
+        .neumorphic-button:active {
+            box-shadow: inset 4px 4px 8px var(--shadow-dark),
+                        inset -4px -4px 8px var(--shadow-light);
+        }
+
+        /* ヘッダー */
+        header {
+            padding: 2rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            box-shadow: 8px 8px 16px var(--shadow-dark),
+                       -8px -8px 16px var(--shadow-light);
+            padding: 5px;
+            background-color: var(--background);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            font-weight: 300;
+        }
+
+        /* ナビゲーション */
+        nav {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        /* 作品セクション */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+
+        .portfolio-item {
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .portfolio-info {
+            padding: 1rem 0;
+        }
+
+        .portfolio-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-info p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* スキルセクション */
+        .skills-container {
+            margin: 2rem 0;
+        }
+
+        .skill-bars {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-item {
+            margin: 15px 0;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .skill-bar {
+            height: 10px;
+            border-radius: 5px;
+            background: var(--background);
+            box-shadow: inset 3px 3px 6px var(--shadow-dark),
+                        inset -3px -3px 6px var(--shadow-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent), #4d7ca8);
+            border-radius: 5px;
+        }
+
+        /* お問い合わせセクション */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: var(--background);
+            box-shadow: inset 4px 4px 8px var(--shadow-dark),
+                        inset -4px -4px 8px var(--shadow-light);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            box-shadow: inset 6px 6px 12px var(--shadow-dark),
+                        inset -6px -6px 12px var(--shadow-light);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* フッター */
+        footer {
+            margin-top: 4rem;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 10px;
+            box-shadow: 5px 5px 10px var(--shadow-dark),
+                       -5px -5px 10px var(--shadow-light);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 7px 7px 14px var(--shadow-dark),
+                       -7px -7px 14px var(--shadow-light);
+        }
+
+        .copyright {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* レスポンシブデザイン */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header>
+            <div class="header-content neumorphic">
+                <div class="profile-image">
+                    <img src="/api/placeholder/150/150" alt="プロフィール画像">
+                </div>
+                <h1>田中 デザイン</h1>
+                <p class="tagline">プロダクトデザイナー / UX/UIスペシャリスト</p>
+                <p>革新的なプロダクトデザインで、ユーザー体験を変革します。</p>
+            </div>
+        </header>
+
+        <!-- ナビゲーション -->
+        <nav>
+            <button class="neumorphic-button" onclick="scrollToSection('portfolio')">作品</button>
+            <button class="neumorphic-button" onclick="scrollToSection('about')">自己紹介</button>
+            <button class="neumorphic-button" onclick="scrollToSection('skills')">スキル</button>
+            <button class="neumorphic-button" onclick="scrollToSection('contact')">お問い合わせ</button>
+        </nav>
+
+        <!-- ポートフォリオセクション -->
+              <section id="portfolio" class="portfolio-section neumorphic">
+            <h2 class="section-title">ポートフォリオ</h2>
+            
+            <!-- カテゴリフィルター -->
+            <div class="category-nav">
+                <button class="category-button active" data-category="all">すべて</button>
+                <button class="category-button" data-category="ui-ux">UI/UXデザイン</button>
+                <button class="category-button" data-category="industrial">インダストリアルデザイン</button>
+                <button class="category-button" data-category="service">サービスデザイン</button>
+                <button class="category-button" data-category="experience">エクスペリエンスデザイン</button>
+                <button class="category-button" data-category="concept">コンセプトデザイン</button>
+            </div>
+            
+            <div class="portfolio-grid">
+                <!-- UI/UXデザイン -->
+                <div class="portfolio-item neumorphic" data-category="ui-ux">
+                    <span class="category-tag tag-ui-ux">UI/UXデザイン</span>
+                    <img src="/api/placeholder/350/250" alt="モバイルバンキングアプリ" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3>モバイルバンキングアプリ</h3>
+                        <p>ユーザビリティ向上のための全面的な再設計。利用者満足度が45%向上。</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item neumorphic" data-category="ui-ux">
+                    <span class="category-tag tag-ui-ux">UI/UXデザイン</span>
+                    <img src="/api/placeholder/350/250" alt="フィットネスアプリ" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3>フィットネストラッカーアプリ</h3>
+                        <p>データビジュアライゼーションを活用したフィットネスアプリのUI設計。</p>
+                    </div>
+                </div>
+                
+                <!-- インダストリアルデザイン -->
+                <div class="portfolio-item neumorphic" data-category="industrial">
+                    <span class="category-tag tag-industrial">インダストリアルデザイン</span>
+                    <img src="/api/placeholder/350/250" alt="スマートデスクランプ" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3>スマートデスクランプ</h3>
+                        <p>IoT機能を備えたミニマリストデザインの照明製品。エネルギー効率向上設計。</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item neumorphic" data-category="industrial">
+                    <span class="category-tag tag-industrial">インダストリアルデザイン</span>
+                    <img src="/api/placeholder/350/250" alt="モジュラーヘッドフォン" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3>モジュラーヘッドフォン</h3>
+                        <p>サステナブルな部品交換が可能な次世代オーディオデバイス。</p>
+                    </div>
+                </div>
+                
+                <!-- サービスデザイン -->
+                <div class="portfolio-item neumorphic" data-category="service">
+                    <span class="category-tag tag-service">サービスデザイン</span>
+                    <img src="/api/placeholder/350/250" alt="シェアリングエコノミー" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3>地域シェアリングプラットフォーム</h3>
+                        <p>地域コミュニティ向けのツールシェアリングサービスの設計とシステム構築。</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item neumorphic" data-category="service">
+                    <span class="category-tag tag-service">サービスデザイン</span>
+                    <img src="/api/placeholder/350/250" alt="医療サービス" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3>遠隔医療サービスフロー</h3>
+                        <p>高齢者でも使いやすい遠隔医療サービスの設計とユーザーフロー最適化。</p>
+                    </div>
+                </div>
+                
+                <!-- エクスペリエンスデザイン -->
+                <div class="portfolio-item neumorphic" data-category="experience">
+                    <span class="category-tag tag-experience">エクスペリエンスデザイン</span>
+                    <img src="/api/placeholder/350/250" alt="没入型展示" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3>インタラクティブミュージアム体験</h3>
+                        <p>デジタルとフィジカルを融合させた博物館の没入型展示デザイン。</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item neumorphic" data-category="experience">
+                    <span class="category-tag tag-experience">エクスペリエンスデザイン</span>
+                    <img src="/api/placeholder/350/250" alt="VR体験" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3>VR教育プラットフォーム</h3>
+                        <p>歴史学習のための仮想現実体験設計。ユーザー満足度98%。</p>
+                    </div>
+                </div>
+                
+                <!-- コンセプトデザイン -->
+                <div class="portfolio-item neumorphic" data-category="concept">
+                    <span class="category-tag tag-concept">コンセプトデザイン</span>
+                    <img src="/api/placeholder/350/250" alt="未来住居" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3>2040年の都市型住居</h3>
+                        <p>持続可能性と効率性を追求した未来の住空間コンセプト設計。</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item neumorphic" data-category="concept">
+                    <span class="category-tag tag-concept">コンセプトデザイン</span>
+                    <img src="/api/placeholder/350/250" alt="自律移動システム" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3>自律型パーソナルモビリティ</h3>
+                        <p>高齢化社会における新しい移動手段のコンセプト開発。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 自己紹介セクション -->
+        <section id="about" class="neumorphic">
+            <h2>自己紹介</h2>
+            <p>プロダクトデザインとユーザー体験に情熱を注ぐデザイナーです。複雑な問題を美しく使いやすいデザインで解決することを目指しています。</p>
+            <p>これまで様々な業界のクライアントと協力し、ユーザー中心のデザインプロセスを通じて、革新的なソリューションを提供してきました。</p>
+            
+            <div class="neumorphic-inset" style="margin-top: 20px; padding: 15px;">
+                <blockquote>
+                    「優れたデザインは問題を解決するだけでなく、人々の生活を豊かにします。」
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- スキルセクション -->
+        <section id="skills" class="neumorphic">
+            <h2>スキル</h2>
+            <div class="skills-container">
+                <div class="skill-bars">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>UI/UXデザイン</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>プロトタイピング</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>ユーザーリサーチ</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>フロントエンド開発</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>アニメーション</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>デザインシステム</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 88%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- フッター -->
+        <footer>
+            <div class="social-icons">
+                <div class="social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </div>
+                <div class="social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                    </svg>
+                </div>
+                <div class="social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </div>
+                <div class="social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                </div>
+                <div class="social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                    </svg>
+                </div>
+            </div>
+            <p class="copyright">© 2025 田中デザイン. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        // ポートフォリオアイテムをクリックした時のアニメーション
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        portfolioItems.forEach(item => {
+            item.addEventListener('click', () => {
+                item.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    item.style.transform = 'translateY(-5px)';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
