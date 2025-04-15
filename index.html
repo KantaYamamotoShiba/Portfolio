@@ -174,6 +174,41 @@
             font-size: 0.95rem;
         }
 
+
+.category-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.category-button {
+    border: none;
+    border-radius: 50px;
+    padding: 8px 16px;
+    margin: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: white;
+    background: linear-gradient(45deg, var(--accent-light), var(--accent-mid));
+    box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+    transition: all 0.2s ease;
+}
+
+.category-button.active {
+    transform: scale(1.05);
+    box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.2),
+                inset -3px -3px 6px rgba(255, 255, 255, 0.1);
+}
+
+.category-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 12px var(--shadow-dark),
+                -6px -6px 12px var(--shadow-light);
+}
+
+
         /* スキルセクション */
         .skills-container {
             margin: 2rem 0;
@@ -574,7 +609,29 @@
                 element.scrollIntoView({ behavior: 'smooth' });
             }
         }
-        
+
+
+        // カテゴリフィルター機能
+document.querySelectorAll('.category-button').forEach(button => {
+    button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category');
+
+        // ボタンの active 状態を切り替え
+        document.querySelectorAll('.category-button').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        // ポートフォリオ項目を表示/非表示にする
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            const itemCategory = item.getAttribute('data-category');
+            if (category === 'all' || itemCategory === category) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+});
+
         // ポートフォリオアイテムをクリックした時のアニメーション
         const portfolioItems = document.querySelectorAll('.portfolio-item');
         portfolioItems.forEach(item => {
